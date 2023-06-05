@@ -54,3 +54,7 @@ Route::get('/admin/addemployee',[AdminController::class,'addemployee']);
 Route::get('/admin/adduser',[AdminController::class,'adduser']);
 Route::get('/admin/addvacancy',[AdminController::class,'addvacancy']);
 Route::get('/admin/userprofile',[AdminController::class,'userprofile']);
+Route::post('/admin/savecompany',[AdminController::class,'savecompany']);
+Route::get('/admin/deletecompany/{id}',[AdminController::class,'deletecompany']);
+Route::get('/admin/editcompany/{id}',[AdminController::class,'editcompany']);
+Route::post('/admin/updatecompany',[AdminController::class,'updatecompany']);

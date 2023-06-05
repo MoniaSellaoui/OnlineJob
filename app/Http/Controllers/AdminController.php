@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Company;
 
 class AdminController extends Controller
 {
@@ -12,8 +13,8 @@ class AdminController extends Controller
         return view('admin.dashboard');
     }
     public function companies()
-    {
-        return view('admin.company');
+    { $companies=Company::get();
+        return view('admin.company')->with('companies',$companies);
     }
     public function vacancy()
     {
@@ -59,4 +60,39 @@ class AdminController extends Controller
     {
         return view('admin.userprofile');
     }
+
+
+
+    public function savecompany(Request $request)
+    {
+        $company=new Company();
+        $company->name=$request->input('name');
+        $company->address=$request->input('address');
+        $company->contact=$request->input('contact');
+        $company->save();
+        return  back()->with('status','the company name has been successfully created !! ');
+    }
+
+    public function deletecompany($id)
+    {
+        $company=Company::find($id);
+        $company->delete();
+        return  back()->with('status','the company name has been successfully deleted !! ');
+    }
+public function editcompany($id)
+{$company=Company::find($id);
+    return view('admin.editcompany')->with('company',$company);
+}
+public function updatecompany(Request $request)
+{   $company=Company::find($request->input('id'));
+    $company->name=$request->input('name');
+    $company->address=$request->input('address');
+    $company->contact=$request->input('contact');
+    $company->update();
+    return  redirect('/admin/companies')->with('status','the company name has been successfully updated !! ');
+
+    
+}
+
+
 }
