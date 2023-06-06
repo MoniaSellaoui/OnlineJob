@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Company;
 use App\Models\Employee;
+use App\Models\Category;
 
 class AdminController extends Controller
 {
@@ -22,8 +23,8 @@ class AdminController extends Controller
         return view('admin.vacancy');
     }
     public function category()
-    {
-        return view('admin.category');
+    {$categories=Category::get();
+        return view('admin.category')->with('categories',$categories);
     }
     public function employee()
     {$employees=Employee::get();
@@ -149,5 +150,32 @@ public function updateemployee(Request $request)
     $employee->update();
     return  redirect('/admin/employees')->with('status','the employee has been successfully updated !! ');
 
+}
+public function savecategory(Request $request)
+{
+$category=new Category();
+$category->category=$request->input('category');
+$category->save();
+return  back()->with('status','the category  has been successfully created!! ');
+
+
+}
+public function deletecategory($id)
+{
+    $category=Category::find($id);
+    $category->delete();
+    return  back()->with('status','the category name has been successfully deleted !! ');
+}
+public function editcategory($id)
+{
+    $category=Category::find($id);
+ 
+    return view('admin.editcategory')->with('category',$category);
+}
+public function updatecategory(Request $request)
+{   $category=Category::find($request->input('id'));
+    $category->category=$request->input('category');
+    $category->update();
+    return  redirect('/admin/categories')->with('status','the category has been successfully updated !! ');
 }
 }

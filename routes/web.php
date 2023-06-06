@@ -62,3 +62,7 @@ Route::post('/admin/saveemployee',[AdminController::class,'saveemployee']);
 Route::get('/admin/deleteemployee/{id}',[AdminController::class,'deleteemployee']);
 Route::get('/admin/editemployee/{id}',[AdminController::class,'editemployee']);
 Route::post('/admin/updateemployee',[AdminController::class,'updateemployee']);
+Route::post('/admin/savecategory',[AdminController::class,'savecategory']);
+Route::get('/admin/deletecategory/{id}',[AdminController::class,'deletecategory']);
+Route::get('/admin/editcategory/{id}',[AdminController::class,'editcategory']);
+Route::post('/admin/updatecategory',[AdminController::class,'updatecategory']);

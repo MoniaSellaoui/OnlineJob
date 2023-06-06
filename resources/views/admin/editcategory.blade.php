@@ -20,14 +20,9 @@
                 <div class="row">
                   <div class="col-xs-12">
                     <div class="box">
-                      @if (Session::has('status'))
-                      <div class="alert-success" style="height:30px;text-align:center;padding:5px">
-                      {{Session::get('status')}}
-                      </div>
-                          
-                      @endif
+                   
                       <div class="box-body">
-                          <form class="form-horizontal span6" action="/admin/savecategory" method="POST">
+                          <form class="form-horizontal span6" action="/admin/updatecategory" method="POST">
                             {{ csrf_field() }}
                        
                           <div class="row">
@@ -43,8 +38,9 @@
                               "CATEGORY">Category:</label>
           
                               <div class="col-md-8">
+                                <input type="hidden" name="id" value="{{$category->id}}">
                                 <input class="form-control input-sm" id="CATEGORY" name="category" placeholder=
-                                    "Category" type="text" value="">
+                                    "Category" type="text" value="{{$category->category}}">
                               </div>
                             </div>
                           </div>
@@ -54,7 +50,7 @@
                               <label class="col-md-4 control-label" for=
                               "idno"></label>
                               <div class="col-md-8">
-                                <button class="btn btn-primary btn-sm" name="save" type="submit" ><span class="fa fa-save fw-fa"></span> Save</button>
+                                <button class="btn btn-primary btn-sm" name="save" type="submit" ><span class="fa fa-save fw-fa"></span>update</button>
                               </div>
                             </div>
                           </div> 
