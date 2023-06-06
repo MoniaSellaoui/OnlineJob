@@ -52,7 +52,7 @@
                                                     <td>{{$company->address}}</td>
                                                     <td>{{$company->contact}}</td>
                                                     <td align="center">
-                                                        <a title="Edit" href="/admin/editcompany/1" class="btn btn-primary btn-xs  ">  <span class="fa fa-edit fw-fa"></a>
+                                                        <a title="Edit" href="/admin/editcompany/{{$company->id}}" class="btn btn-primary btn-xs  ">  <span class="fa fa-edit fw-fa"></a>
                                                         <a title="Delete" href="/admin/deletecompany/{{$company->id}}" class="btn btn-danger btn-xs  ">  <span class="fa  fa-trash-o fw-fa "></a>
                                                     </td>
                                                 </tr>

@@ -1,6 +1,6 @@
 @extends('admin_Layout.master')
 @section('title')
-  Add Employee
+  Edit Employee
 @endsection
 
 @section('content')
@@ -19,33 +19,36 @@
                         <div class="col-xs-12">
                             <div class="box">
                                 <div class="box-body">
-                                                            <section id="feature" class="transparent-bg">
+                                    <section id="feature" class="transparent-bg">
                                         <div class="container">
                                             <div class="center wow fadeInDown">
-                                                @if (Session::has('status'))
-                                                <div class="alert-success" style="height:30px;text-align:center;padding:5px">
-                                                {{Session::get('status')}}
-                                                </div>
-                                                    
-                                                @endif
-                                                <h2 class="page-header">Add New Employee</h2>
+                                               
+                                                <h2 class="page-header">Edit Employee</h2>
                                             </div>
                                             <br>
                                          
                                             <div class="row">
                                               
                                                 <div class="features">
-                                                    <form class="form-horizontal span6  wow fadeInDown" action="/admin/saveemployee " method="POST">
+                                                    <form class="form-horizontal span6  wow fadeInDown" action="/admin/updateemployee " method="POST">
                                                         {{ csrf_field() }}
                                                        
                                                         <div class="form-group">
+                                                           
                                                             <div class="col-md-8">
+                                                                @if (Session::has('status'))
+                                                                <div class="alert-success" style="height:30px;text-align:center;padding:5px">
+                                                                {{Session::get('status')}}
+                                                                </div>
+                                                                    
+                                                                @endif
                                                             <label class="col-md-4 control-label" for=
                                                             "EMPLOYEEID">Employee ID:</label>
             
                                                                 <div class="col-md-8">
+                                                                    <input type="hidden" name="id" value="{{$employee->id}}">
                                                                     <input class="form-control input-sm" id="EMPLOYEEID" name="empid" placeholder=
-                                                                    "Employee ID" type="text" value="" required>
+                                                                    "Employee ID" type="text" value="{{$employee->empid}}" required>
                                                                 </div>
                                                             </div>
                                                         </div>           
@@ -56,7 +59,7 @@
             
                                                         <div class="col-md-8">
                                                             <input class="form-control input-sm" id="FNAME" name="firstname" placeholder=
-                                                                "Firstname" type="text" value=""   autocomplete="off" required>
+                                                                "Firstname" type="text" value="{{$employee->firstname}}"   autocomplete="off" required>
                                                         </div>
                                                         </div>
                                                     </div>
@@ -67,7 +70,7 @@
                                                         "LNAME">Lastname:</label>
             
                                                         <div class="col-md-8">
-                                                            <input  class="form-control input-sm" id="LNAME" name="lastname" placeholder="Lastname"     autocomplete="off" required>
+                                                            <input  class="form-control input-sm" id="LNAME" name="lastname" value="{{$employee->lastname}}" placeholder="Lastname"     autocomplete="off" required>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -77,7 +80,7 @@
                                                             <label class="col-md-4 control-label" for="MNAME">Middle Name:</label>
             
                                                             <div class="col-md-8">
-                                                                <input  class="form-control input-sm" id="MNAME" name="middlename" placeholder=
+                                                                <input  class="form-control input-sm" id="MNAME" name="middlename" value="{{$employee->middlename}}" placeholder=
                                                                     "Middle Name"     autocomplete="off" required>
                                                             </div>
                                                         </div>
@@ -91,28 +94,50 @@
                                                         <div class="col-md-8">
                                                         
                                                             <textarea class="form-control input-sm" id="ADDRESS" name="address" placeholder=
-                                                            "Address" type="text" value="" required   autocomplete="off"></textarea>
+                                                            "Address" type="text" value="{{$employee->address}}" required   autocomplete="off">{{$employee->address}}</textarea>
                                                         </div>
                                                     </div>
                                                     </div> 
             
                                                     <div class="form-group">
                                                     <div class="col-md-8">
+                                                        
                                                         <label class="col-md-4 control-label" for=
                                                         "Gender">Sex:</label>
             
                                                         <div class="col-md-8">
+                                                            @if ($employee->gender=='Male')
                                                             <div class="col-lg-5">
-                                                            <div class="radio">
-                                                                <label><input checked id="optionsRadios1" checked="True" name="gender" type="radio" value="Female">Female</label>
-                                                            </div>
-                                                            </div>
+                                                                <div class="radio">
+                                                                    <label><input id="optionsRadios1" 
+                                                                         name="gender" type="radio" value="Female">Female</label>
+                                                                </div>
+                                                                </div>
+                
+                                                                <div class="col-lg-4">
+                                                                <div class="radio">
+                                                                    <label><input id="optionsRadios2" checked="True"
+                                                                          name="gender" type="radio" value="{{$employee->gender}}"> Male</label>
+                                                                </div>
+                                                                </div> 
+
+                                                        @else
+                                                       
             
                                                             <div class="col-lg-4">
                                                             <div class="radio">
-                                                                <label><input id="optionsRadios2"   name="gender" type="radio" value="Male"> Male</label>
+                                                                <label><input id="optionsRadios2" checked="True"
+                                                                      name="gender" type="radio" value="{{$employee->gender}}">Female</label>
                                                             </div>
-                                                            </div> 
+                                                            </div>
+                                                            <div class="col-lg-5">
+                                                                <div class="radio">
+                                                                    <label><input id="optionsRadios1" 
+                                                                         name="gender" type="radio" value="Female">Male</label>
+                                                                </div>
+                                                                </div>
+                                                        @endif
+                                                        
                                                             
                                                         </div>
                                                     </div>
@@ -128,7 +153,7 @@
                                                                     <span class="input-group-addon"> 
                                                                         <i class="fa fa-calendar"></i> 
                                                                     </span>  
-                                                                    <input class="form-control input-sm date_picker" id="BIRTHDATE" name="birthday" placeholder="Date of Birth" type="text"    value="" required  autocomplete="off">
+                                                                    <input class="form-control input-sm date_picker" id="BIRTHDATE" name="birthday" placeholder="Date of Birth" type="text"    value="{{$employee->birthday}}" required  autocomplete="off">
                                                                 </div>
                                                                 </div>
                                                             </div>
@@ -142,7 +167,7 @@
                                                                     <div class="col-md-8">
                                                                     
                                                                         <textarea class="form-control input-sm" id="BIRTHPLACE" name="birthplace" placeholder=
-                                                                        "Place of Birth" type="text" value="" required   autocomplete="off"></textarea>
+                                                                        "Place of Birth" type="text" value="{{$employee->birthplace}}" required   autocomplete="off">{{$employee->birthplace}}</textarea>
                                                                     </div>
                                                                 </div>
                                                                 </div> 
@@ -156,7 +181,7 @@
                                                                 <div class="col-md-8">
                                                                     
                                                                     <input class="form-control input-sm" id="TELNO" name="phone" placeholder=
-                                                                        "Contact No." type="text" any value="" required   autocomplete="off">
+                                                                        "Contact No." type="text" any value="{{$employee->phone}}" required   autocomplete="off">
                                                                 </div>
                                                                 </div>
                                                             </div> 
@@ -168,10 +193,24 @@
             
                                                                 <div class="col-md-8">
                                                                     <select class="form-control input-sm" name="civilstatus" id="CIVILSTATUS" required>
-                                                                        <option value="" >Select</option>
-                                                                        <option value="Single">Single</option>
+                                                                        <option value="{{$employee->civilstatus}}" >{{$employee->civilstatus}}</option>
+
+                                                                        @if ($employee->civilstatus=="Single")
+
                                                                         <option value="Married">Married</option>
                                                                         <option value="Widow" >Widow</option>
+                                                                            
+                                                                        @elseif($employee->civilstatus=="Married")
+                                                                        <option value="Single">Single</option>
+                                                                        <option value="Widow" >Widow</option>
+                                                                      
+                                                                            
+                                                                        @else
+                                                                        <option value="Single">Single</option>
+                                                                        <option value="Married">Married</option>
+                                                                       
+                                                                        @endif
+                                                                      
                                                                     </select> 
                                                                 </div>
                                                                 </div>
@@ -185,7 +224,7 @@
                                                                 <div class="col-md-8">
                                                                     
                                                                     <input class="form-control input-sm" id="POSITION" name="position" placeholder=
-                                                                        "Postion" type="text" any value="" required   autocomplete="off">
+                                                                        "Postion" type="text" any value="{{$employee->position}}" required   autocomplete="off">
                                                                 </div>
                                                                 </div>
                                                             </div>
@@ -196,7 +235,7 @@
                                                                 "EMP_HIREDDATE">Hired Date:</label> 
                                                                 <div class="col-md-8">
                                                                     <div class="input-group date" data-provide="datepicker" data-date="2012-12-21T15:25:00Z">
-                                                                        <input type="input" class="form-control input-sm date_picker" id="HIREDDATE" name="hireddate" value="" placeholder="hired date" required>
+                                                                        <input type="input" class="form-control input-sm date_picker" id="HIREDDATE" name="hireddate" value="{{$employee->hireddate}}" placeholder="hired date" required>
                                                                         <span class="input-group-addon"><i class="fa fa-th"></i></span>
                                                                     </div>
                                                                 </div>
@@ -209,7 +248,7 @@
                                                                 <label class="col-md-4 control-label" for=
                                                                 "EMP_EMAILADDRESS">Email Address:</label> 
                                                                 <div class="col-md-8">
-                                                                    <input type="Email" class="form-control input-sm" id="EMP_EMAILADDRESS" name="email" placeholder="Email Address"   autocomplete="false" required/> 
+                                                                    <input type="Email" class="form-control input-sm" id="EMP_EMAILADDRESS" name="email" value="{{$employee->email}}" placeholder="Email Address"   autocomplete="false" required/> 
                                                                 </div>
                                                                 </div>
                                                             </div>  
@@ -222,7 +261,7 @@
                                                                     <div class="col-md-8">
                                                                     <select class="form-control input-sm" id="COMPANYID" name="companyname" required>
 
-                                                                             <option value="">Select</option>
+                                                                             <option value="{{$employee->companyname}}">{{$employee->companyname}}</option>
                                                                              @foreach ($companies as $company )
                                                                              <option value="{{$company->name}}">{{$company->name}}</option>
                                                                              @endforeach
@@ -239,7 +278,7 @@
                                                                     "idno"></label>  
             
                                                                     <div class="col-md-8">
-                                                                        <button class="btn btn-primary btn-sm" name="save" type="submit" ><span class="fa fa-save fw-fa"></span> Save</button>
+                                                                        <button class="btn btn-primary btn-sm" name="save" type="submit" ><span class="fa fa-save fw-fa"></span>update</button>
                                                                     </div>
                                                                 </div>
                                                             </div> 

@@ -29,12 +29,7 @@
                                   <h1 class="page-header">Edit New Company</h1>
                                 </div>
                                </div> 
-                              @if (Session::has('status'))
-                              <div class="alert-success" style="height:30px;text-align:center;padding:5px">
-                              {{Session::get('status')}}
-                              </div>
-                                  
-                              @endif
+                           
                                 <br>
                               <div class="form-group">
                                 <div class="col-md-8">
