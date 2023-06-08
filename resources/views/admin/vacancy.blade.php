@@ -19,8 +19,14 @@
           <div class="row">
             <div class="col-xs-12">
               <div class="box">
+                @if (Session::has('status'))
+                <div class="alert-success" style="height:30px;text-align:center;padding:5px">
+                {{Session::get('status')}}
+                </div>
+                    
+                @endif
                 <div class="box-body">
-                                <div class="row">
+                      <div class="row">
                     <div class="col-lg-12">
                       <h1 class="page-header">List of Vacancies  <a href="/admin/addvacancy" class="btn btn-primary btn-xs  ">  <i class="fa fa-plus-circle fw-fa"></i> Add Job Vacancy</a>  </h1>
                     </div>
@@ -49,38 +55,27 @@
                       </tr>	
                     </thead> 
                     <tbody>
-                                        <tr>
-                          <td>Copreros</td>
-                          <td>IT Manager</td>
-                          <td>2</td>
-                          <td>1000</td>
-                          <td>Jan 30</td>
-                          <td>Two year Experience</td>
-                          <td>We are looking for bachelor of science in information technology. asdasdasd</td>
-                          <td>Male/Female</td>
-                          <td>Maintainance.</td>
-                          <td align="center">
-                            <a title="Edit" href="/admin/editvacancy/1" class="btn btn-primary btn-xs  ">  <span class="fa fa-edit fw-fa"></a>
-                            <a title="Delete" href="/admin/deletevacancy/1" class="btn btn-danger btn-xs  ">  <span class="fa  fa-trash-o fw-fa "></a>
-                          </td>
-                        </tr>
-                                        <tr>
-                          <td>URC</td>
-                          <td>Digital Marketer</td>
-                          <td>3</td>
-                          <td>2500</td>
-                          <td>Jan 30</td>
-                          <td>Four years of experience</td>
-                          <td>We are looking for bachelor of science in information technology. asdasdasd</td>
-                          <td>Male/Female</td>
-                          <td>Marketing</td>
-                          <td align="center">
-                            <a title="Edit" href="/admin/editvacancy/3" class="btn btn-primary btn-xs  ">  <span class="fa fa-edit fw-fa"></a>
-                            <a title="Delete" href="/admin/deletevacancy/3" class="btn btn-danger btn-xs  ">  <span class="fa  fa-trash-o fw-fa "></a>
-                          </td>
-                        </tr>
+                      @foreach ($vacancies as $vacancy )
+                      <tr>
+                        <td>{{$vacancy->companyname}}</td>
+                        <td>{{$vacancy->category}}</td>
+                        <td>{{$vacancy->ocuptitle}}</td>
+                        <td>{{$vacancy->numofemp}}</td>
+                        <td>{{$vacancy->salary}}</td>
+                        <td>{{$vacancy->experience}}</td>
+                        <td>{{$vacancy->description}}</td>
+                        <td>{{$vacancy->prefsex}}</td>
+                        <td>{{$vacancy->sector}}</td>
+                        <td align="center">
+                          <a title="Edit" href="/admin/editvacancy/{{$vacancy->id}}" class="btn btn-primary btn-xs  ">  <span class="fa fa-edit fw-fa"></a>
+                          <a title="Delete" href="/admin/deletevacancy/{{$vacancy->id}}" class="btn btn-danger btn-xs  ">  <span class="fa  fa-trash-o fw-fa "></a>
+                        </td>
+                      </tr>
+                      @endforeach
+                      
+                     
                                   
-                            </tbody>
+                    </tbody>
                   </table>
                       <div class="btn-group">
                   <!--  <a href="index.php?view=add" class="btn btn-default">New</a> -->

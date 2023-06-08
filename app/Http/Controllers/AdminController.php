@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Company;
 use App\Models\Employee;
 use App\Models\Category;
+use App\Models\Vacancy;
 
 class AdminController extends Controller
 {
@@ -19,11 +20,13 @@ class AdminController extends Controller
         return view('admin.company')->with('companies',$companies);
     }
     public function vacancy()
-    {
-        return view('admin.vacancy');
+    {$vacancies=Vacancy::get();
+  
+        return view('admin.vacancy')->with('vacancies',$vacancies);
     }
     public function category()
     {$categories=Category::get();
+      
         return view('admin.category')->with('categories',$categories);
     }
     public function employee()
@@ -55,8 +58,9 @@ class AdminController extends Controller
         return view('admin.adduser');
     }
     public function addvacancy()
-    {
-        return view('admin.addvacancy');
+    {$companies=Company::get();
+     $categories=Category::get();
+        return view('admin.addvacancy')->with('companies',$companies)->with('categories',$categories);
     }
     public function userprofile()
     {
@@ -118,8 +122,8 @@ public function saveemployee(Request $request)
 
 public function deleteemployee($id)
 {
-$employee=Employee::find($id);
-$employee->delete();
+ $employee=Employee::find($id);
+ $employee->delete();
 return  back()->with('status','the employee has been successfully deleted !! ');
 
 }
@@ -153,10 +157,10 @@ public function updateemployee(Request $request)
 }
 public function savecategory(Request $request)
 {
-$category=new Category();
-$category->category=$request->input('category');
-$category->save();
-return  back()->with('status','the category  has been successfully created!! ');
+    $category=new Category();
+    $category->category=$request->input('category');
+    $category->save();
+    return  back()->with('status','the category  has been successfully created!! ');
 
 
 }
@@ -177,5 +181,67 @@ public function updatecategory(Request $request)
     $category->category=$request->input('category');
     $category->update();
     return  redirect('/admin/categories')->with('status','the category has been successfully updated !! ');
+}
+
+public function createvacancy(Request $request)
+{
+$vacancy=new Vacancy();
+$company=Company::where('name',$request->input('companyname'))->first();
+
+$vacancy->companyname=$request->input('companyname');
+$vacancy->category=$request->input('category');
+$vacancy->address=$company->address;
+$vacancy->occuptitle=$request->input('occuptitle');
+$vacancy->numofemp=$request->input('numofemp');
+$vacancy->salary=$request->input('salary');
+$vacancy->duration=$request->input('duration');
+$vacancy->experience=$request->input('experience');
+$vacancy->description=$request->input('description');
+$vacancy->prefsex=$request->input('prefsex');
+$vacancy->sector=$request->input('sector');
+
+$vacancy->save();
+return  back()->with('status','the vacancy has been successfully created!! ');
+
+
+
+
+
+
+
+
+}
+public function deletevacancy($id)
+{
+    $vacancy=Vacancy::find($id);
+    $vacancy->delete();
+    return  back()->with('status','the vacancy has been successfully deleted !! ');
+}
+public function editvacancy($id)
+{
+    $vacancy=Vacancy::find($id);
+    $companies=Company::where('name',"!=",$vacancy->companyname)->get();
+    $categories=Category::where('category',"!=",$vacancy->category)->get();
+ 
+    return view('admin.editvacancy')->with('vacancy',$vacancy)->with('companies',$companies)->with('categories',$categories);
+}
+public function updatevacancy(Request $request) 
+{
+    $vacancy=Vacancy::find($request->id);
+    $company=Company::where('name',$request->input('companyname'))->first();
+    $vacancy->companyname=$request->input('companyname');
+$vacancy->category=$request->input('category');
+$vacancy->address=$company->address;
+$vacancy->occuptitle=$request->input('occuptitle');
+$vacancy->numofemp=$request->input('numofemp');
+$vacancy->salary=$request->input('salary');
+$vacancy->duration=$request->input('duration');
+$vacancy->experience=$request->input('experience');
+$vacancy->description=$request->input('description');
+$vacancy->prefsex=$request->input('prefsex');
+$vacancy->sector=$request->input('sector');
+
+$vacancy->update();
+return  redirect('/admin/vacancies')->with('status','the vacancy has been successfully updated!! ');
 }
 }

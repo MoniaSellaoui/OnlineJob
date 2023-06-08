@@ -66,3 +66,7 @@ Route::post('/admin/savecategory',[AdminController::class,'savecategory']);
 Route::get('/admin/deletecategory/{id}',[AdminController::class,'deletecategory']);
 Route::get('/admin/editcategory/{id}',[AdminController::class,'editcategory']);
 Route::post('/admin/updatecategory',[AdminController::class,'updatecategory']);
+Route::post('/admin/createvacancy',[AdminController::class,'createvacancy']);
+Route::get('/admin/deletevacancy/{id}',[AdminController::class,'deletevacancy']);
+Route::get('/admin/editvacancy/{id}',[AdminController::class,'editvacancy']);
+Route::post('/admin/updatevacancy',[AdminController::class,'updatevacancy']);
