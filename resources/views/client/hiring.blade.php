@@ -26,12 +26,15 @@
                 <th>Date Posted</th>
             </thead>
             <tbody>
-                    <tr>
-                        <td><a href="/jobdetails">Developer</a></td>
-                        <td>URC</td>
-                        <td>Bry Camugao</td>
-                        <td>2022-07-26 02:15:02</td>
-                    </tr>  
+                @foreach ($vacancies as $vacancy )
+                <tr>
+                    <td><a href="/jobdetails/{{$vacancy->id}}">{{$vacancy->occuptitle}}</a></td>
+                    <td>{{$vacancy->companyname}}</td>
+                    <td>{{$vacancy->address}}</td>
+                    <td>{{$vacancy->created_at}}</td>
+                </tr> 
+                @endforeach
+         
                   
                 
             </tbody>

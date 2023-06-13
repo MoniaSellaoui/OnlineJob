@@ -19,22 +19,25 @@
 <section id="content">
   <div class="container content">     
       <!-- Service Blcoks -->  
+     
       <div class="row">
-              >
-                <div class="col-sm-4 info-blocks">
-                  <i class="icon-info-blocks fa fa-building-o"></i>
-                  <div class="info-blocks-in">
-                      <h3><a href="/hiringcompany">URC</a></h3>
-                      <!-- <p>weqwe</p> -->
-                      <p>Address :Bry Camugao</p>
-                      <p>Contact No. :023654</p>
-                  </div>
-              </div>
-            
-             
-          
+        @foreach ( $companies as $company )
+        <div class="col-sm-4 info-blocks">
+          <i class="icon-info-blocks fa fa-building-o"></i>
+          <div class="info-blocks-in">
+              <h3><a href="/hiringcompany/{{$company->name}}">{{$company->name}}</a></h3>
+              <!-- <p>weqwe</p> -->
+              <p>Address :{{$company->address}}</p>
+              <p>Contact No. :{{$company->contact}}</p>
+          </div>
+</div>
+    
+     
+@endforeach
 
-      </div> 
+</div> 
+     
+     
   </div>
 </section>  
 <!-- end content -->

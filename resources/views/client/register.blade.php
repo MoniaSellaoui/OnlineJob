@@ -17,16 +17,25 @@
   </section>
 
   <section id="content">
+    @if (Session::has('status'))
+    <div class="alert-success" style="height:30px;text-align:center;padding:5px">
+    {{Session::get('status')}}
+    </div>
+        
+    @endif
       <div class="container content">    
         <p> </p> 
+     
 
-        <form class="form-horizontal span6  wow fadeInDown" action="createaccount " method="POST">
-          <input type="hidden" name="_token" value="ZJLPQIkfMJhoPRGwoueM8KtNelvHt69vXLhsfjjO">
+        <form class="form-horizontal span6  wow fadeInDown" action="/createaccount " method="POST">
+          {{ csrf_field() }}
+      
           <div class="col-sm-8"> 
             <div class="row">
               <h2 class=" ">Personal Info</h2>
               
-                          <br>       
+                <br>   
+                 
               <div class="form-group">
                 <div class="col-md-11">
                   <label class="col-md-4 control-label" for=

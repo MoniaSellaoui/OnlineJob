@@ -212,38 +212,38 @@
                                 <div class="row contentbody">
                                         <div class="col-sm-6">
                                             <ul>
-                                                <li><i class="fp-ht-bed"></i>Required No. of Employee's : 2</li>
-                                                <li><i class="fp-ht-food"></i>Salary : 15,000.00</li>
-                                                <li><i class="fa fa-sun-"></i>Duration of Employment : Jan 30</li>
+                                                <li><i class="fp-ht-bed"></i>Required No. of Employee's : {{$vacancy->numofemp}}</li>
+                                                <li><i class="fp-ht-food"></i>Salary : {{$vacancy->salary}}</li>
+                                                <li><i class="fa fa-sun-"></i>Duration of Employment : {{$vacancy->duration}}</li>
                                             </ul>
                                         </div>
                                         <div class="col-sm-6">
                                             <ul> 
-                                                <li><i class="fp-ht-tv"></i>Prefered Sex : Male</li>
-                                                <li><i class="fp-ht-computer"></i>Sector of Vacancy : Programming</li>
+                                                <li><i class="fp-ht-tv"></i>Prefered Sex : {{$vacancy->prefsex}}</li>
+                                                <li><i class="fp-ht-computer"></i>Sector of Vacancy : {{$vacancy->sector}}</li>
                                             </ul>
                                         </div>
                                         <div class="col-sm-12">
                                             <p>Qualification/Work Experience :</p>
                                             <ul style="list-style: none;"> 
-                                                <li>Two year Experience</li> 
+                                                <li>{{$vacancy->experience}}</li> 
                                             </ul> 
                                         </div>
                                         <div class="col-sm-12"> 
                                             <p>Job Description:</p>
                                             <ul style="list-style: none;"> 
-                                                <li>We are looking for bachelor of science in information technology. asdasdasd</li> 
+                                                <li>{{$vacancy->description}}</li> 
                                             </ul> 
                                         </div>
                                         <div class="col-sm-12">
-                                            <p>Employer :  URC</p> 
-                                            <p>Location :  Bry Camugao</p>
+                                            <p>Employer :  {{$vacancy->companyname}}</p> 
+                                            <p>Location :  {{$vacancy->address}}</p>
                                         </div>
                                     </div>
                         </div>
                         
                         <div class="panel-footer">
-                            Date Posted :  2022-07-26 02:15:02  
+                            Date Posted : {{$vacancy->created_at}}  
                         </div>
                     </div>  
                 </div>

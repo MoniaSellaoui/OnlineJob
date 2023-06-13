@@ -11,8 +11,9 @@
                 <div id="loginerrormessage"></div>
                 <div class="login-box"> 
                     <div class="login-box-body" style="border: solid 1px #ddd;padding: 35px;min-height: 350px;"> 
-                    <form action="login" method="post">
-                        <input type="hidden" name="_token" value="ZJLPQIkfMJhoPRGwoueM8KtNelvHt69vXLhsfjjO">
+                    <form action="/login" method="post">
+                        {{ csrf_field() }}
+                     
                         <div class="form-group has-feedback">
                             <input type="text" class="form-control" placeholder="Username" name="username" required id="user_email">
                             <span class="fa fa-user form-control-feedback" style="margin-top: -22px;"></span>
@@ -37,13 +38,13 @@
                         </div>
                     
                     <a href="#">I forgot my password</a><br>
-                    <a href="register" class="text-center">Register a new membership</a>
+                    <a href="/register" class="text-center">Register a new membership</a>
                     </div>
                     <!-- /.login-box-body -->
                 </div>
             </div>
 
-            <div class="modal-footer">
+              <div class="modal-footer">
                 <button class="btn btn-default" data-dismiss="modal">Close</button> <button class="btn btn-primary"
                 name="btnlogin" type="submit" id="btnlogin"  >Login</button>
             </div>

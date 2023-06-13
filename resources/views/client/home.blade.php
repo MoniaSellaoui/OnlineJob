@@ -47,52 +47,21 @@
                         <br/>
                     </div>
                 </div>
+            @foreach ($companies as $company )
+            <div class="col-sm-4 info-blocks">
+                <i class="icon-info-blocks fa fa-building-o"></i>
+                <div class="info-blocks-in">
+                    <h3>{{$company->name}}</h3>
+                    <!-- <p>weqwe</p> -->
+                    <p>{{$company->address}}</p>
+                    <p>{{$company->contact}}</p>
+                </div>
+            </div>
 
-                                <div class="col-sm-4 info-blocks">
-                        <i class="icon-info-blocks fa fa-building-o"></i>
-                        <div class="info-blocks-in">
-                            <h3>Copreros</h3>
-                            <!-- <p>weqwe</p> -->
-                            <p>Address :Mabinay&#039;s</p>
-                            <p>Contact No. :03565</p>
-                        </div>
-                    </div>
-                                <div class="col-sm-4 info-blocks">
-                        <i class="icon-info-blocks fa fa-building-o"></i>
-                        <div class="info-blocks-in">
-                            <h3>URC</h3>
-                            <!-- <p>weqwe</p> -->
-                            <p>Address :Bry Camugao</p>
-                            <p>Contact No. :023654</p>
-                        </div>
-                    </div>
-                                <div class="col-sm-4 info-blocks">
-                        <i class="icon-info-blocks fa fa-building-o"></i>
-                        <div class="info-blocks-in">
-                            <h3>Quest</h3>
-                            <!-- <p>weqwe</p> -->
-                            <p>Address :Kabankalan City</p>
-                            <p>Contact No. :23165</p>
-                        </div>
-                    </div>
-                                <div class="col-sm-4 info-blocks">
-                        <i class="icon-info-blocks fa fa-building-o"></i>
-                        <div class="info-blocks-in">
-                            <h3>IT Company</h3>
-                            <!-- <p>weqwe</p> -->
-                            <p>Address :Kabankalan City</p>
-                            <p>Contact No. :04564123</p>
-                        </div>
-                    </div>
-                                <div class="col-sm-4 info-blocks">
-                        <i class="icon-info-blocks fa fa-building-o"></i>
-                        <div class="info-blocks-in">
-                            <h3>Palacios Company</h3>
-                            <!-- <p>weqwe</p> -->
-                            <p>Address :Kabankalan City</p>
-                            <p>Contact No. :0625656899</p>
-                        </div>
-                    </div>
+            @endforeach
+                   
+                 
+                 
                 
 
 
@@ -112,15 +81,13 @@
 
                 <div class="row">
                     <div class="col-md-12 ">
-                                                <div class="col-md-3" style="font-size:15px;padding:5px"> 
-                                * <a href="/jobbycategory/Technology">Technology</a>
-                            </div> 
-                                                <div class="col-md-3" style="font-size:15px;padding:5px"> 
-                                * <a href="/jobbycategory/Digital Marketing">Digital Marketing</a>
-                            </div> 
-                                                <div class="col-md-3" style="font-size:15px;padding:5px"> 
-                                * <a href="/jobbycategory/It jobs">It jobs</a>
-                            </div> 
+                        @foreach ($categories as $category)
+                        <div class="col-md-3" style="font-size:15px;padding:5px"> 
+                            * <a href="/jobbycategory/{{$category->category}}">{{$category->category}}</a>
+                        </div> 
+                        @endforeach
+                          
+                            
                             
                     </div>
                 </div>

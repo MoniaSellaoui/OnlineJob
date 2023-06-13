@@ -20,7 +20,7 @@
     <div class="container content">      
         <div class="container">
             <div class="mg-available-rooms">
-                <h5 class="mg-sec-left-title">Date Posted :  2022-07-26 02:15:02</h5>
+                <h5 class="mg-sec-left-title">Date Posted :  {{$vacancy->created_at}}</h5>
                 <div class="mg-avl-rooms">
                     <div class="mg-avl-room">
                         <div class="row">
@@ -33,35 +33,35 @@
                                 <div class="row contentbody">
                                     <div class="col-sm-6">
                                         <ul>
-                                            <li><i class="fp-ht-bed"></i>Required No. of Employee's : 2</li>
-                                            <li><i class="fp-ht-food"></i>Salary : 3000</li>
-                                            <li><i class="fa fa-sun-"></i>Duration of Employment : Jan 30</li>
+                                            <li><i class="fp-ht-bed"></i>Required No. of Employee's : {{$vacancy->numofemp}}</li>
+                                            <li><i class="fp-ht-food"></i>Salary : {{$vacancy->salary}}</li>
+                                            <li><i class="fa fa-sun-"></i>Duration of Employment : {{$vacancy->duration}}</li>
                                         </ul>
                                     </div>
                                     <div class="col-sm-6">
                                         <ul>
-                                            <li><i class="fp-ht-tv"></i>Prefered Sex : Male</li>
-                                            <li><i class="fp-ht-computer"></i>Sector of Vacancy : Programming</li>
+                                            <li><i class="fp-ht-tv"></i>Prefered Sex : {{$vacancy->prefsex}}</li>
+                                            <li><i class="fp-ht-computer"></i>Sector of Vacancy : {{$vacancy->sector}}</li>
                                         </ul>
                                     </div>
                                     <div class="col-sm-12">
                                         <p>Qualification/Work Experience :</p>
                                         <ul style="list-style: none;"> 
-                                            <li>Two year Experience</li> 
+                                            <li>{{$vacancy->experience}}</li> 
                                         </ul> 
                                     </div>
                                     <div class="col-sm-12"> 
                                         <p>Job Description:</p>
                                         <ul style="list-style: none;"> 
-                                            <li>We are looking for bachelor of science in information technology. asdasdasd</li> 
+                                            <li>{{$vacancy->description}}</li> 
                                         </ul> 
                                     </div>
                                     <div class="col-sm-12">
-                                        <p>Employer :  URC</p> 
-                                        <p>Location :  Bry Camugao</p>
+                                        <p>Employer :  {{$vacancy->companyname}}</p> 
+                                        <p>Location :  {{$vacancy->address}}</p>
                                     </div>
                                 </div>
-                                <a href="/submitapp" class="btn btn-main btn-next-tab">Apply Now !</a>
+                                <a href="/submitapp/{{$vacancy->id}}" class="btn btn-main btn-next-tab">Apply Now !</a>
                             </div>
                         </div>
                     </div> 
