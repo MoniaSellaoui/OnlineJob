@@ -76,15 +76,18 @@
                           </tr>
                         </thead>
                         <tbody>
-                                                      <tr>
-                              <td class="mailbox-star">
-                                <a href=""><i class="fa fa-pencil-o text-yellow"></i> Developer</a>
-                              </td>
-                              <td class="mailbox-attachment">URC</td>
-                              <td class="mailbox-attachment">Av. Malula num 12 Lemba/Righini</td>
-                              <td class="mailbox-attachment">Thank you for your application and we will call you sooon.
-                              </td>
-                            </tr>   
+                          @foreach ( $applicants as $applicant )
+                          <tr>
+                            <td class="mailbox-star">
+                              <a href=""><i class="fa fa-pencil-o text-yellow"></i> {{$applicant->occuptitle}}</a>
+                            </td>
+                            <td class="mailbox-attachment">{{$applicant->company}}</td>
+                            <td class="mailbox-attachment">{{Session::get('client')->address}}</td>
+                            <td class="mailbox-attachment">{{$applicant->status}}
+                            </td>
+                          </tr> 
+                          @endforeach
+                             
                                 
                         </tbody>
                       </table>

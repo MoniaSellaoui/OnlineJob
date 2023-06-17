@@ -8,6 +8,7 @@ use App\Models\Company;
 use App\Models\Category;
 use App\Models\Vacancy;
 use App\Models\Client;
+use App\Models\Applicant;
 
 
 class ClientController extends Controller
@@ -57,6 +58,10 @@ class ClientController extends Controller
     {
         return view('client.contact');
     }
+    public function success()
+    { return view('client.success');
+
+    }
     public function submitapp($id)
     {$vacancy=Vacancy::find($id);
         if(Session::has('client'))
@@ -68,6 +73,38 @@ class ClientController extends Controller
         }
       
     }
+    public function submit(Request $request)
+
+{ $this->validate($request,["max:1999"]);
+     $applicant=new Applicant();
+     $filenamewithextension=$request->file("resume")->getclientOriginalName();
+     $filename=pathinfo($filenamewithextension,PATHINFO_FILENAME);
+     $extension=$request->file("resume")->getclientOriginalExtension();
+     $filenameTostore=$filename."_".time().".". $extension;
+
+    $applicant->fullname=session::get('client')->firstname." ".session::get('client')->middlename;
+    $applicant->occuptitle=$request->input("occuptitle");
+    $applicant->company=$request->input("companyname");
+    $applicant->clientid=$request->input("clientid");
+    $applicant->vacancyid=$request->input("vacancyid");
+    $applicant->resume= $filenameTostore;
+    $applicant->status="pending"; 
+    $applicant->save();
+
+
+    $Path=$request->file("resume")->StoreAs("public/resumes",$filenameTostore);
+    return redirect('/success')->with('status','your application has been successfully sent!!');
+
+
+
+
+
+}
+
+
+
+
+
     public function hiringcompany($name)
     {$vacancies=Vacancy::where('companyname',$name)->get();
         return view('client.hiringcompany')->with('vacancies',$vacancies)->with('name',$name);
@@ -125,8 +162,8 @@ class ClientController extends Controller
         return redirect('/home');
     }
     public function profile()
-    {
-        return view('client.profile');
+    {$applicants=Applicant::where('clientid',session::get('client')->id)->get();
+        return view('client.profile')->with('applicants',$applicants);
     }
     public function message()
     {

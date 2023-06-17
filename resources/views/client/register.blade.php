@@ -23,6 +23,17 @@
     </div>
         
     @endif
+    @if (count($errors)>0)
+    <div class="alert-danger" style="height:30px;text-align:center;padding:5px">
+   <ul>
+    @foreach ($errors->all() as $error)
+    
+      <li>{{$error}}</li>
+     
+    @endforeach
+   </ul>
+  </div>
+    @endif
       <div class="container content">    
         <p> </p> 
      
